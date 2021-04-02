@@ -1,23 +1,19 @@
-# AutoMapper-Sample
-Automapper sample project
+﻿using AutoMapper.Sample.Dtos;
+using AutoMapper.Sample.ViewModels;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-You will need the [Auto mapper](https://www.nuget.org/packages/AutoMapper/) nuget package.
-
-After you installed te package you can register it with:
-```c#
-            services.AddAutoMapper(x =>
-            {
-                // If a profile hasn't been set then you can register it like:
-                // Add Simple mapping from TestDTO -> UserViewModel
-                //x.CreateMap<UserDto, UserViewModel>();
-            }, typeof(Startup));
-```
-
-You can start already implementing the automapper in the `startup.cs` class. Or if it's better you can add profiles where you can organize your mapping configurations
-```c#
-public class UserProfile : Profile
+namespace AutoMapper.Sample.Profiles
 {
-    public UserProfile()
+    /// <summary>
+    /// If you set the rules with the profile class this will be automatically add it to the maped types of automapper
+    /// </summary>
+    public class UserProfile : Profile
+    {
+        public UserProfile()
         {
             CreateMap<UserDto, UserViewModel>()
                 .ForMember(uvm => uvm.FullAddress, x =>
@@ -43,12 +39,5 @@ public class UserProfile : Profile
                     Console.WriteLine("[After Map]");
                 });
         }
+    }
 }
-```
-
-## Resources
-
-* [Nuget](https://www.nuget.org/packages/AutoMapper/)
-* [Website](https://automapper.org/)
-* [Documentation](https://docs.automapper.org/en/stable/index.html/)
-* [Github](https://github.com/AutoMapper/AutoMapper)
